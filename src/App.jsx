@@ -4,7 +4,7 @@ function App() {
   return (
     <div>
       <AuthProvider>
-        <h1>E&C GESTION</h1>
+        <h1>E&C GESTION #1</h1>
         <LoginFirebase />
       </AuthProvider>
     </div>
