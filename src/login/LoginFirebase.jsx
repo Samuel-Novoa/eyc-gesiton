@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import "../App.css";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 function LoginFirebase() {
      // Inicializar el authcontext para obtener y manejar las funciones de login, register, logout
      const auth = useAuth()
 
+     const navigate = useNavigate();
+
      // Nombre de usuario
-     const {displayName} = auth.user
+     const { displayName } = auth.user
      // Alerta: Nombre de usuario
      console.log(displayName)
 
@@ -29,9 +32,20 @@ function LoginFirebase() {
           auth.register(emailRegister, passwordRegister)
      }
 
+     // const handleLogin = (e) => {
+     //      e.preventDefault();
+     //      auth.login(email, password)
+     // };
+
      const handleLogin = (e) => {
-          e.preventDefault();
-          auth.login(email, password)
+          try {
+               e.preventDefault();
+               auth.login(email, password);
+               navigate('/fichas');
+          } catch (error) {
+               console.error('Error al iniciar sesión:', error);
+               // Manejar el error de inicio de sesión aquí
+          }
      };
 
      const handleGoogle = (e) => {
@@ -39,15 +53,8 @@ function LoginFirebase() {
           auth.loginWithGoogle()
      }
 
-     const handleLogout = () => {
-          auth.logout()
-     }
-     // ALerta: Login
-     console.log(email, password, "stateLogin")
-
      return (
           <div className="App">
-               {displayName && <p>User: {displayName}</p>}
                <form className="form">
                     <h3 className="title">Registro</h3>
                     <input onChange={(e) => setEmailRegister(e.target.value)} type="email" className="input" />
@@ -62,8 +69,6 @@ function LoginFirebase() {
                     <button onClick={(e) => handleLogin(e)} className="button">submit</button>
                     <button onClick={(e) => handleGoogle(e)} className="button">Google</button>
                </form>
-
-               <button onClick={() => handleLogout()} className="button">Logout</button>
           </div>
      );
 }

@@ -1,13 +1,11 @@
-import LoginFirebase from "./login/LoginFirebase";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from './context/AuthContext';
+import Router from './router/Router';
+
 function App() {
   return (
-    <div>
-      <AuthProvider>
-        <h1>E&C GESTION</h1>
-        <LoginFirebase />
-      </AuthProvider>
-    </div>
+    <AuthProvider>
+      <Router />
+    </AuthProvider>
   );
 }
 
