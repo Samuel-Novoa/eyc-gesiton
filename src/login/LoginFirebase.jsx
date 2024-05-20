@@ -12,7 +12,7 @@ function LoginFirebase() {
      // Nombre de usuario
      const { displayName } = auth.user
      // Alerta: Nombre de usuario
-     console.log(displayName)
+     // console.log(displayName)
 
      // Registro
      const [emailRegister, setEmailRegister] = useState("")
@@ -23,7 +23,7 @@ function LoginFirebase() {
      const [password, setPassword] = useState("");
 
      // Alerta: Manejo de los campos de input
-     console.log(emailRegister, passwordRegister, "stateLoginFireBase")
+     // console.log(emailRegister, passwordRegister, "stateLoginFireBase")
 
      const handleRegister = (e) => {
           // Para que el boton no refresque la pagina y los datos se pierdan
