@@ -1,7 +1,7 @@
 import React from 'react'
 import Main from '../../layout/Main'
 
-function UserView() {
+const UserView = () => {
   return (
      <Main>
           <div>UserView</div>
@@ -9,4 +9,4 @@ function UserView() {
   )
 }
 
-export default UserView
+export default UserView;

@@ -1,7 +1,7 @@
 import React from 'react'
 import Main from '../layout/Main'
 
-function HomePage() {
+const HomePage = () => {
      return (
           <Main >
                <div>HomePage</div>
@@ -9,4 +9,4 @@ function HomePage() {
      )
 }
 
-export default HomePage
+export default HomePage;
