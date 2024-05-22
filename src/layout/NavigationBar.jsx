@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
-  const { user, auth } = useAuth();
+  const auth = useAuth();
+  const { user } = useAuth();
   const [role, setRole] = useState(null);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const NavigationBar = () => {
     <div>
       <nav>
         <div>
-          <Link to={"/fichas"}>E&C - Gestion</Link>
+          <h1>E&C - Gestion</h1>
           <ul>
             {role ===
               "admin" ? (

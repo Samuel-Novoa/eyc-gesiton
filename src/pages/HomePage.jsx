@@ -27,7 +27,6 @@ const HomePage = () => {
 
   return (
     <Main>
-      <div>HomePage</div>
       {role === "admin" ? (
         <p>Admin</p>
       ) : role === "user" ? (
