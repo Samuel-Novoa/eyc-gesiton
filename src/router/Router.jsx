@@ -62,7 +62,7 @@ const Router = () => {
 
         {/* User Routes */}
         <Route
-          path="/"
+          path="/usuario"
           element={
             userRole === "user" ? <UserView /> : <Navigate to="/login" />
           }

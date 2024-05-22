@@ -1,11 +1,19 @@
-import React from "react";
-import { useAuth } from "../context/AuthContext";
+import React, { useState, useEffect} from "react";
+import { useAuth, getRole } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
 const NavigationBar = () => {
-  const auth = useAuth();
-  //   const { displayName } = auth.user;
   const navigate = useNavigate();
+  const { user, auth } = useAuth();
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      getRole(user.uid).then((role) => {
+        setRole(role);
+      });
+    }
+  }, [user]);
 
   const handleLogout = () => {
     auth.logout();
@@ -18,18 +26,23 @@ const NavigationBar = () => {
         <div>
           <Link to={"/fichas"}>E&C - Gestion</Link>
           <ul>
-            <li>
-              <Link to={"/fichas"}>Fichas</Link>
-            </li>
-            <li>
-              <Link to={"/clientes"}>Clientes</Link>
-            </li>
-            <li>
-              <Link to={"/servicios"}>Servicios</Link>
-            </li>
-            <li>
-              <Link to={"/admin"}>Admin</Link>
-            </li>
+            {role ===
+              "admin" ? (
+                <>
+                  <li>
+                    <Link to={"/fichas"}>Fichas</Link>
+                  </li>
+                  <li>
+                    <Link to={"/clientes"}>Clientes</Link>
+                  </li>
+                  <li>
+                    <Link to={"/servicios"}>Servicios</Link>
+                  </li>
+                  <li>
+                    <Link to={"/admin"}>Admin</Link>
+                  </li>
+                </>
+              ) : null}
             <li>
               <button onClick={() => handleLogout()} className="button">
                 Logout
