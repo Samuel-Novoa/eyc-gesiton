@@ -5,6 +5,23 @@ import { auth } from "../firebase/firebase.config";
 import { createContext, useContext } from "react";
 // Funciones de firebase auth - creando la autenticacion (register/login/google/logout)
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+
+
+const firestore = getFirestore();
+
+export async function getRole(uid) {
+  const docuRef = doc(firestore, `users/${uid}`);
+  const docuCifrada = await getDoc(docuRef);
+
+  if (docuCifrada.exists()) {
+    const infoFinal = docuCifrada.data().role;
+    return infoFinal;
+  } else {
+    console.log("No such document");
+    return null;
+  }
+}
 
 export const authContext = createContext();
 

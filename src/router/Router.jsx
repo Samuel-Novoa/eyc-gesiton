@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 import HomePage from "../pages/HomePage";
 import Admin from "../pages/admin/Admin";
 import Clientes from "../pages/admin/Clientes";
@@ -8,24 +7,8 @@ import Fichas from "../pages/admin/Fichas";
 import Servicios from "../pages/admin/Servicios";
 import LoginPage from "../pages/LoginPage";
 import NotFoundPage from "../pages/NotFoundPage";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { auth } from "../firebase/firebase.config";
 import UserView from "../pages/user/UserView";
-
-const firestore = getFirestore();
-
-async function getRole(uid) {
-  const docuRef = doc(firestore, `users/${uid}`);
-  const docuCifrada = await getDoc(docuRef);
-
-  if (docuCifrada.exists()) {
-    const infoFinal = docuCifrada.data().role;
-    return infoFinal;
-  } else {
-    console.log("No such document");
-    return null;
-  }
-}
+import { useAuth, getRole } from "../context/AuthContext";
 
 const Router = () => {
   const { user } = useAuth();
